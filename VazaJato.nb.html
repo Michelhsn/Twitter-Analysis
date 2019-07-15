@@ -1749,18 +1749,34 @@ summary {
 </div>
 
 
-<pre class="{r}"><code>library(rtweet)
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShydHdlZXQpXG5saWJyYXJ5KHdvcmRjbG91ZClcbmxpYnJhcnkod29yZGNsb3VkMilcbmxpYnJhcnkodG0pXG5saWJyYXJ5KFJDb2xvckJyZXdlcilcbmxpYnJhcnkoY2x1c3RlcilcbmxpYnJhcnkoZnBjKVxuYGBgIn0= -->
+<pre class="r"><code>library(rtweet)
 library(wordcloud)
 library(wordcloud2)
 library(tm)
 library(RColorBrewer)
 library(cluster)
 library(fpc)</code></pre>
-<pre class="{r}"><code># carrega tweets
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBjYXJyZWdhIHR3ZWV0c1xubGF2YWphdG9fdHdlZXRzIDwtIHNlYXJjaF90d2VldHMoXCIjVmF6YUphdG9cIiwgbiA9IDEwMDAwLCBpbmNsdWRlX3J0cyA9IEZBTFNFLCBsYW5nID0gXCJwdFwiKVxuVmlldyhsYXZhamF0b190d2VldHMpXG5cbmBgYCJ9 -->
+<pre class="r"><code># carrega tweets
 lavajato_tweets &lt;- search_tweets(&quot;#VazaJato&quot;, n = 10000, include_rts = FALSE, lang = &quot;pt&quot;)
 View(lavajato_tweets)
 </code></pre>
-<pre class="{r}"><code># Análise da frquência de tweets
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBBbsOhbGlzZSBkYSBmcnF1w6puY2lhIGRlIHR3ZWV0c1xuIyBPcyBwaWNvcyBubyBncsOhZmljbyBlc3TDo28gcmVsYWNpb25hZG9zIGEgcHVibGljYcOnw6NvIGRlIG5vdMOtY2lhcyByZWZlcmVudGVzIGFvIHZhemFtZW50byBkZSBkacOhbG9nb3MgZGEgbGF2YSBqYXRvLlxubGF2YWphdG9fdHdlZXRzICU+JVxuICB0c19wbG90KFwiMSBob3Vyc1wiKSArXG4gIGdncGxvdDI6OnRoZW1lX21pbmltYWwoKSArXG4gIGdncGxvdDI6OnRoZW1lKHBsb3QudGl0bGUgPSBnZ3Bsb3QyOjplbGVtZW50X3RleHQoZmFjZSA9IFwiYm9sZFwiKSkgK1xuICBnZ3Bsb3QyOjpsYWJzKFxuICAgIHg9IE5VTEwsIHkgPSBOVUxMLFxuICAgIHRpdGxlID0gXCJGcnF1w6puY2lhIGRhIEhhc2h0YWcgVmF6YUphdG9cIixcbiAgICBzdWJ0aXRsZSA9IFwiVHdlZXRzIHBvciBob3JhXCIsXG4gICAgY2FwdGlvbiA9IFwiXFxuU291cmNlOiBUd2l0dGVyXCJcbiAgKVxuYGBgIn0= -->
+<pre class="r"><code># Análise da frquência de tweets
 # Os picos no gráfico estão relacionados a publicação de notícias referentes ao vazamento de diálogos da lava jato.
 lavajato_tweets %&gt;%
   ts_plot(&quot;1 hours&quot;) +
@@ -1772,7 +1788,13 @@ lavajato_tweets %&gt;%
     subtitle = &quot;Tweets por hora&quot;,
     caption = &quot;\nSource: Twitter&quot;
   )</code></pre>
-<pre class="{r}"><code>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG50ZXh0b192aiA8LSBWQ29ycHVzKFZlY3RvclNvdXJjZShlbmMybmF0aXZlKGxhdmFqYXRvX3R3ZWV0cyR0ZXh0KSkpXG50ZXh0b192aiA8LSB0bV9tYXAodGV4dG9fdmosIGNvbnRlbnRfdHJhbnNmb3JtZXIoZnVuY3Rpb24oeCkgaWNvbnYoeCwgdG89J1VURi04Jywgc3ViPSdieXRlJykpKVxudGV4dG9fdmogPC0gdG1fbWFwKHRleHRvX3ZqLCBjb250ZW50X3RyYW5zZm9ybWVyKHRvbG93ZXIpKVxudGV4dG9fdmogPC0gdG1fbWFwKHRleHRvX3ZqLCByZW1vdmVQdW5jdHVhdGlvbilcbnRleHRvX3ZqIDwtIHRtX21hcCh0ZXh0b192aixyZW1vdmVXb3Jkcywgc3RvcHdvcmRzKFwicG9ydHVndWVzZVwiKSlcblxudGV4dG9fdmpcbmBgYCJ9 -->
+<pre class="r"><code>
 texto_vj &lt;- VCorpus(VectorSource(enc2native(lavajato_tweets$text)))
 texto_vj &lt;- tm_map(texto_vj, content_transformer(function(x) iconv(x, to=&#39;UTF-8&#39;, sub=&#39;byte&#39;)))
 texto_vj &lt;- tm_map(texto_vj, content_transformer(tolower))
@@ -1780,7 +1802,11 @@ texto_vj &lt;- tm_map(texto_vj, removePunctuation)
 texto_vj &lt;- tm_map(texto_vj,removeWords, stopwords(&quot;portuguese&quot;))
 
 texto_vj</code></pre>
-<pre class="{r}"><code># Limpando alguns termos
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBMaW1wYW5kbyBhbGd1bnMgdGVybW9zXG5tYXRyaXpfdmogPC0gRG9jdW1lbnRUZXJtTWF0cml4KHRleHRvX3ZqKVxuZnJlcXVlbmNpYV92aiA8LSBjb2xTdW1zKGFzLm1hdHJpeChtYXRyaXpfdmopKSAgIFxubWF0cml6X3ZqXG5cbm1hdHJpel92al9jbGVhbiA8LSByZW1vdmVTcGFyc2VUZXJtcyhtYXRyaXpfdmosIDAuOTUpIFxuXG5mcmVxdWVuY2lhX3ZqIDwtIGNvbFN1bXMoYXMubWF0cml4KG1hdHJpel92al9jbGVhbikpICBcbmZyZXF1ZW5jaWFfdmpcblxuYGBgIn0= -->
+<pre class="r"><code># Limpando alguns termos
 matriz_vj &lt;- DocumentTermMatrix(texto_vj)
 frequencia_vj &lt;- colSums(as.matrix(matriz_vj))   
 matriz_vj
@@ -1790,27 +1816,53 @@ matriz_vj_clean &lt;- removeSparseTerms(matriz_vj, 0.95)
 frequencia_vj &lt;- colSums(as.matrix(matriz_vj_clean))  
 frequencia_vj
 </code></pre>
-<pre class="{r}"><code># ajustes finais
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBhanVzdGVzIGZpbmFpc1xudGV4dF92al9maW5hbCA8LSB0bV9tYXAodGV4dG9fdmosIHJlbW92ZVdvcmRzLCBjKFwidmF6YWphdG9cIiwgXCJwcmFcIiwgXCJtw6pzXCIsIFwic29icmVcIiwgXCJ2YWlcIikpIFxubWF0cml6X3ZqX2NsZWFuIDwtIHJlbW92ZVNwYXJzZVRlcm1zKERvY3VtZW50VGVybU1hdHJpeCh0ZXh0X3ZqX2ZpbmFsKSwgMC45NSkgXG5mcmVxdWVuY2lhX3ZqIDwtIGNvbFN1bXMoYXMubWF0cml4KG1hdHJpel92al9jbGVhbikpICBcbmZyZXF1ZW5jaWFfdmpcbmBgYCJ9 -->
+<pre class="r"><code># ajustes finais
 text_vj_final &lt;- tm_map(texto_vj, removeWords, c(&quot;vazajato&quot;, &quot;pra&quot;, &quot;mês&quot;, &quot;sobre&quot;, &quot;vai&quot;)) 
 matriz_vj_clean &lt;- removeSparseTerms(DocumentTermMatrix(text_vj_final), 0.95) 
 frequencia_vj &lt;- colSums(as.matrix(matriz_vj_clean))  
 frequencia_vj</code></pre>
-<pre class="{r}"><code># Exibição da nuvem de palavras
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBFeGliacOnw6NvIGRhIG51dmVtIGRlIHBhbGF2cmFzXG5jb3JlcyA8LSBicmV3ZXIucGFsKDUsXCJEYXJrMlwiKVxud29yZGNsb3VkKG5hbWVzKGZyZXF1ZW5jaWFfdmopLGZyZXF1ZW5jaWFfdmosbWluLmZyZXE9NSxtYXgud29yZHM9NDAsIHJhbmRvbS5vcmRlcj1ULCBjb2xvcnM9Y29yZXMpXG5gYGAifQ== -->
+<pre class="r"><code># Exibição da nuvem de palavras
 cores &lt;- brewer.pal(5,&quot;Dark2&quot;)
 wordcloud(names(frequencia_vj),frequencia_vj,min.freq=5,max.words=40, random.order=T, colors=cores)</code></pre>
-<pre class="{r}"><code>df_cloud2 &lt;- as.data.frame(frequencia_vj)
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGZfY2xvdWQyIDwtIGFzLmRhdGEuZnJhbWUoZnJlcXVlbmNpYV92ailcbmRmX2Nsb3VkMlssMl0gPSBkZl9jbG91ZDJbLDFdXG5kZl9jbG91ZDJbLDFdID0gbmFtZXMoZnJlcXVlbmNpYV92ailcbndvcmRjbG91ZDIoZGZfY2xvdWQyKVxuICAgICAgICAgICAgICBcbmBgYCJ9 -->
+<pre class="r"><code>df_cloud2 &lt;- as.data.frame(frequencia_vj)
 df_cloud2[,2] = df_cloud2[,1]
 df_cloud2[,1] = names(frequencia_vj)
 wordcloud2(df_cloud2)
               </code></pre>
-<pre class="{r}"><code># Análise de grupos
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBBbsOhbGlzZSBkZSBncnVwb3NcbmRpc3RhbmNpYSA8LSBkaXN0KHQobWF0cml6X3ZqX2NsZWFuKSwgbWV0aG9kPVwiZXVjbGlkaWFuXCIpICBcbnZqX2ttZWFucyA8LSBrbWVhbnMoZGlzdGFuY2lhLCAzKSAgIFxuY2x1c3Bsb3QoYXMubWF0cml4KGRpc3RhbmNpYSksIHZqX2ttZWFucyRjbHVzdGVyLCBjb2xvcj1ULCBzaGFkZT1ULCBsYWJlbHM9MywgbGluZXM9MCxcbiAgICAgICAgIG1haW4gPSBcIkstTWVhbnMgVHdlZXRzIFZhemFKYXRvXCIgKSBcblxuYGBgIn0= -->
+<pre class="r"><code># Análise de grupos
 distancia &lt;- dist(t(matriz_vj_clean), method=&quot;euclidian&quot;)  
 vj_kmeans &lt;- kmeans(distancia, 3)   
 clusplot(as.matrix(distancia), vj_kmeans$cluster, color=T, shade=T, labels=3, lines=0,
          main = &quot;K-Means Tweets VazaJato&quot; ) 
 </code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIlR3ZWV0cyBWYXphSmF0byINCm91dHB1dDogaHRtbF9ub3RlYm9vaw0KLS0tDQoNCg0KDQpgYGB7cn0NCmxpYnJhcnkocnR3ZWV0KQ0KbGlicmFyeSh3b3JkY2xvdWQpDQpsaWJyYXJ5KHdvcmRjbG91ZDIpDQpsaWJyYXJ5KHRtKQ0KbGlicmFyeShSQ29sb3JCcmV3ZXIpDQpsaWJyYXJ5KGNsdXN0ZXIpDQpsaWJyYXJ5KGZwYykNCmBgYA0KDQpgYGB7cn0NCiMgY2FycmVnYSB0d2VldHMNCmxhdmFqYXRvX3R3ZWV0cyA8LSBzZWFyY2hfdHdlZXRzKCIjVmF6YUphdG8iLCBuID0gMTAwMDAsIGluY2x1ZGVfcnRzID0gRkFMU0UsIGxhbmcgPSAicHQiKQ0KVmlldyhsYXZhamF0b190d2VldHMpDQoNCmBgYA0KDQpgYGB7cn0NCiMgQW7DoWxpc2UgZGEgZnJxdcOqbmNpYSBkZSB0d2VldHMNCiMgT3MgcGljb3Mgbm8gZ3LDoWZpY28gZXN0w6NvIHJlbGFjaW9uYWRvcyBhIHB1YmxpY2HDp8OjbyBkZSBub3TDrWNpYXMgcmVmZXJlbnRlcyBhbyB2YXphbWVudG8gZGUgZGnDoWxvZ29zIGRhIGxhdmEgamF0by4NCmxhdmFqYXRvX3R3ZWV0cyAlPiUNCiAgdHNfcGxvdCgiMSBob3VycyIpICsNCiAgZ2dwbG90Mjo6dGhlbWVfbWluaW1hbCgpICsNCiAgZ2dwbG90Mjo6dGhlbWUocGxvdC50aXRsZSA9IGdncGxvdDI6OmVsZW1lbnRfdGV4dChmYWNlID0gImJvbGQiKSkgKw0KICBnZ3Bsb3QyOjpsYWJzKA0KICAgIHg9IE5VTEwsIHkgPSBOVUxMLA0KICAgIHRpdGxlID0gIkZycXXDqm5jaWEgZGEgSGFzaHRhZyBWYXphSmF0byIsDQogICAgc3VidGl0bGUgPSAiVHdlZXRzIHBvciBob3JhIiwNCiAgICBjYXB0aW9uID0gIlxuU291cmNlOiBUd2l0dGVyIg0KICApDQpgYGANCg0KYGBge3J9DQoNCnRleHRvX3ZqIDwtIFZDb3JwdXMoVmVjdG9yU291cmNlKGVuYzJuYXRpdmUobGF2YWphdG9fdHdlZXRzJHRleHQpKSkNCnRleHRvX3ZqIDwtIHRtX21hcCh0ZXh0b192aiwgY29udGVudF90cmFuc2Zvcm1lcihmdW5jdGlvbih4KSBpY29udih4LCB0bz0nVVRGLTgnLCBzdWI9J2J5dGUnKSkpDQp0ZXh0b192aiA8LSB0bV9tYXAodGV4dG9fdmosIGNvbnRlbnRfdHJhbnNmb3JtZXIodG9sb3dlcikpDQp0ZXh0b192aiA8LSB0bV9tYXAodGV4dG9fdmosIHJlbW92ZVB1bmN0dWF0aW9uKQ0KdGV4dG9fdmogPC0gdG1fbWFwKHRleHRvX3ZqLHJlbW92ZVdvcmRzLCBzdG9wd29yZHMoInBvcnR1Z3Vlc2UiKSkNCg0KdGV4dG9fdmoNCmBgYA0KYGBge3J9DQojIExpbXBhbmRvIGFsZ3VucyB0ZXJtb3MNCm1hdHJpel92aiA8LSBEb2N1bWVudFRlcm1NYXRyaXgodGV4dG9fdmopDQpmcmVxdWVuY2lhX3ZqIDwtIGNvbFN1bXMoYXMubWF0cml4KG1hdHJpel92aikpICAgDQptYXRyaXpfdmoNCg0KbWF0cml6X3ZqX2NsZWFuIDwtIHJlbW92ZVNwYXJzZVRlcm1zKG1hdHJpel92aiwgMC45NSkgDQoNCmZyZXF1ZW5jaWFfdmogPC0gY29sU3Vtcyhhcy5tYXRyaXgobWF0cml6X3ZqX2NsZWFuKSkgIA0KZnJlcXVlbmNpYV92ag0KDQpgYGANCg0KYGBge3J9DQojIGFqdXN0ZXMgZmluYWlzDQp0ZXh0X3ZqX2ZpbmFsIDwtIHRtX21hcCh0ZXh0b192aiwgcmVtb3ZlV29yZHMsIGMoInZhemFqYXRvIiwgInByYSIsICJtw6pzIiwgInNvYnJlIiwgInZhaSIpKSANCm1hdHJpel92al9jbGVhbiA8LSByZW1vdmVTcGFyc2VUZXJtcyhEb2N1bWVudFRlcm1NYXRyaXgodGV4dF92al9maW5hbCksIDAuOTUpIA0KZnJlcXVlbmNpYV92aiA8LSBjb2xTdW1zKGFzLm1hdHJpeChtYXRyaXpfdmpfY2xlYW4pKSAgDQpmcmVxdWVuY2lhX3ZqDQpgYGANCg0KDQpgYGB7cn0NCiMgRXhpYmnDp8OjbyBkYSBudXZlbSBkZSBwYWxhdnJhcw0KY29yZXMgPC0gYnJld2VyLnBhbCg1LCJEYXJrMiIpDQp3b3JkY2xvdWQobmFtZXMoZnJlcXVlbmNpYV92aiksZnJlcXVlbmNpYV92aixtaW4uZnJlcT01LG1heC53b3Jkcz00MCwgcmFuZG9tLm9yZGVyPVQsIGNvbG9ycz1jb3JlcykNCmBgYA0KDQpgYGB7cn0NCmRmX2Nsb3VkMiA8LSBhcy5kYXRhLmZyYW1lKGZyZXF1ZW5jaWFfdmopDQpkZl9jbG91ZDJbLDJdID0gZGZfY2xvdWQyWywxXQ0KZGZfY2xvdWQyWywxXSA9IG5hbWVzKGZyZXF1ZW5jaWFfdmopDQp3b3JkY2xvdWQyKGRmX2Nsb3VkMikNCiAgICAgICAgICAgICAgDQpgYGANCg0KYGBge3J9DQojIEFuw6FsaXNlIGRlIGdydXBvcw0KZGlzdGFuY2lhIDwtIGRpc3QodChtYXRyaXpfdmpfY2xlYW4pLCBtZXRob2Q9ImV1Y2xpZGlhbiIpICANCnZqX2ttZWFucyA8LSBrbWVhbnMoZGlzdGFuY2lhLCAzKSAgIA0KY2x1c3Bsb3QoYXMubWF0cml4KGRpc3RhbmNpYSksIHZqX2ttZWFucyRjbHVzdGVyLCBjb2xvcj1ULCBzaGFkZT1ULCBsYWJlbHM9MywgbGluZXM9MCwNCiAgICAgICAgIG1haW4gPSAiSy1NZWFucyBUd2VldHMgVmF6YUphdG8iICkgDQoNCmBgYA0KDQo=</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlR3ZWV0cyBWYXphSmF0byINCm91dHB1dDoNCiAgd29yZF9kb2N1bWVudDogZGVmYXVsdA0KICBwZGZfZG9jdW1lbnQ6IGRlZmF1bHQNCiAgaHRtbF9ub3RlYm9vazogZGVmYXVsdA0KLS0tDQoNCg0KDQpgYGB7cn0NCmxpYnJhcnkocnR3ZWV0KQ0KbGlicmFyeSh3b3JkY2xvdWQpDQpsaWJyYXJ5KHdvcmRjbG91ZDIpDQpsaWJyYXJ5KHRtKQ0KbGlicmFyeShSQ29sb3JCcmV3ZXIpDQpsaWJyYXJ5KGNsdXN0ZXIpDQpsaWJyYXJ5KGZwYykNCmBgYA0KDQpgYGB7cn0NCiMgY2FycmVnYSB0d2VldHMNCmxhdmFqYXRvX3R3ZWV0cyA8LSBzZWFyY2hfdHdlZXRzKCIjVmF6YUphdG8iLCBuID0gMTAwMDAsIGluY2x1ZGVfcnRzID0gRkFMU0UsIGxhbmcgPSAicHQiKQ0KVmlldyhsYXZhamF0b190d2VldHMpDQoNCmBgYA0KDQpgYGB7cn0NCiMgQW7DoWxpc2UgZGEgZnJxdcOqbmNpYSBkZSB0d2VldHMNCiMgT3MgcGljb3Mgbm8gZ3LDoWZpY28gZXN0w6NvIHJlbGFjaW9uYWRvcyBhIHB1YmxpY2HDp8OjbyBkZSBub3TDrWNpYXMgcmVmZXJlbnRlcyBhbyB2YXphbWVudG8gZGUgZGnDoWxvZ29zIGRhIGxhdmEgamF0by4NCmxhdmFqYXRvX3R3ZWV0cyAlPiUNCiAgdHNfcGxvdCgiMSBob3VycyIpICsNCiAgZ2dwbG90Mjo6dGhlbWVfbWluaW1hbCgpICsNCiAgZ2dwbG90Mjo6dGhlbWUocGxvdC50aXRsZSA9IGdncGxvdDI6OmVsZW1lbnRfdGV4dChmYWNlID0gImJvbGQiKSkgKw0KICBnZ3Bsb3QyOjpsYWJzKA0KICAgIHg9IE5VTEwsIHkgPSBOVUxMLA0KICAgIHRpdGxlID0gIkZycXXDqm5jaWEgZGEgSGFzaHRhZyBWYXphSmF0byIsDQogICAgc3VidGl0bGUgPSAiVHdlZXRzIHBvciBob3JhIiwNCiAgICBjYXB0aW9uID0gIlxuU291cmNlOiBUd2l0dGVyIg0KICApDQpgYGANCg0KYGBge3J9DQoNCnRleHRvX3ZqIDwtIFZDb3JwdXMoVmVjdG9yU291cmNlKGVuYzJuYXRpdmUobGF2YWphdG9fdHdlZXRzJHRleHQpKSkNCnRleHRvX3ZqIDwtIHRtX21hcCh0ZXh0b192aiwgY29udGVudF90cmFuc2Zvcm1lcihmdW5jdGlvbih4KSBpY29udih4LCB0bz0nVVRGLTgnLCBzdWI9J2J5dGUnKSkpDQp0ZXh0b192aiA8LSB0bV9tYXAodGV4dG9fdmosIGNvbnRlbnRfdHJhbnNmb3JtZXIodG9sb3dlcikpDQp0ZXh0b192aiA8LSB0bV9tYXAodGV4dG9fdmosIHJlbW92ZVB1bmN0dWF0aW9uKQ0KdGV4dG9fdmogPC0gdG1fbWFwKHRleHRvX3ZqLHJlbW92ZVdvcmRzLCBzdG9wd29yZHMoInBvcnR1Z3Vlc2UiKSkNCg0KdGV4dG9fdmoNCmBgYA0KYGBge3J9DQojIExpbXBhbmRvIGFsZ3VucyB0ZXJtb3MNCm1hdHJpel92aiA8LSBEb2N1bWVudFRlcm1NYXRyaXgodGV4dG9fdmopDQpmcmVxdWVuY2lhX3ZqIDwtIGNvbFN1bXMoYXMubWF0cml4KG1hdHJpel92aikpICAgDQptYXRyaXpfdmoNCg0KbWF0cml6X3ZqX2NsZWFuIDwtIHJlbW92ZVNwYXJzZVRlcm1zKG1hdHJpel92aiwgMC45NSkgDQoNCmZyZXF1ZW5jaWFfdmogPC0gY29sU3Vtcyhhcy5tYXRyaXgobWF0cml6X3ZqX2NsZWFuKSkgIA0KZnJlcXVlbmNpYV92ag0KDQpgYGANCg0KYGBge3J9DQojIGFqdXN0ZXMgZmluYWlzDQp0ZXh0X3ZqX2ZpbmFsIDwtIHRtX21hcCh0ZXh0b192aiwgcmVtb3ZlV29yZHMsIGMoInZhemFqYXRvIiwgInByYSIsICJtw6pzIiwgInNvYnJlIiwgInZhaSIpKSANCm1hdHJpel92al9jbGVhbiA8LSByZW1vdmVTcGFyc2VUZXJtcyhEb2N1bWVudFRlcm1NYXRyaXgodGV4dF92al9maW5hbCksIDAuOTUpIA0KZnJlcXVlbmNpYV92aiA8LSBjb2xTdW1zKGFzLm1hdHJpeChtYXRyaXpfdmpfY2xlYW4pKSAgDQpmcmVxdWVuY2lhX3ZqDQpgYGANCg0KDQpgYGB7cn0NCiMgRXhpYmnDp8OjbyBkYSBudXZlbSBkZSBwYWxhdnJhcw0KY29yZXMgPC0gYnJld2VyLnBhbCg1LCJEYXJrMiIpDQp3b3JkY2xvdWQobmFtZXMoZnJlcXVlbmNpYV92aiksZnJlcXVlbmNpYV92aixtaW4uZnJlcT01LG1heC53b3Jkcz00MCwgcmFuZG9tLm9yZGVyPVQsIGNvbG9ycz1jb3JlcykNCmBgYA0KDQpgYGB7cn0NCmRmX2Nsb3VkMiA8LSBhcy5kYXRhLmZyYW1lKGZyZXF1ZW5jaWFfdmopDQpkZl9jbG91ZDJbLDJdID0gZGZfY2xvdWQyWywxXQ0KZGZfY2xvdWQyWywxXSA9IG5hbWVzKGZyZXF1ZW5jaWFfdmopDQp3b3JkY2xvdWQyKGRmX2Nsb3VkMikNCiAgICAgICAgICAgICAgDQpgYGANCg0KYGBge3J9DQojIEFuw6FsaXNlIGRlIGdydXBvcw0KZGlzdGFuY2lhIDwtIGRpc3QodChtYXRyaXpfdmpfY2xlYW4pLCBtZXRob2Q9ImV1Y2xpZGlhbiIpICANCnZqX2ttZWFucyA8LSBrbWVhbnMoZGlzdGFuY2lhLCAzKSAgIA0KY2x1c3Bsb3QoYXMubWF0cml4KGRpc3RhbmNpYSksIHZqX2ttZWFucyRjbHVzdGVyLCBjb2xvcj1ULCBzaGFkZT1ULCBsYWJlbHM9MywgbGluZXM9MCwNCiAgICAgICAgIG1haW4gPSAiSy1NZWFucyBUd2VldHMgVmF6YUphdG8iICkgDQoNCmBgYA0K</div>
 
 
 
@@ -1857,7 +1909,7 @@ $(document).ready(function () {
 <!-- code folding -->
 <script>
 $(document).ready(function () {
-  window.initializeSourceEmbed("VazaJato.ipynb");
+  window.initializeSourceEmbed("VazaJato.Rmd");
   window.initializeCodeFolding("show" === "show");
 });
 </script>

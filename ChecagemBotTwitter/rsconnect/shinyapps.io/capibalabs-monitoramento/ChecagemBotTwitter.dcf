@@ -1,0 +1,12 @@
+name: ChecagemBotTwitter
+title: ChecagemBotTwitter
+username:
+account: capibalabs-monitoramento
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 1880910
+bundleId: 2839114
+url: https://analise-monitoramento.shinyapps.io/ChecagemBotTwitter/
+when: 1582952103.95502
+asMultiple: FALSE
+asStatic: FALSE

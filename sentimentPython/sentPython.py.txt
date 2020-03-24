@@ -1,0 +1,40 @@
+import tweepy
+from textblob import TextBlob
+from googletrans import Translator 
+from unidecode import unidecode
+#Tokens de acesso 
+consumer_key= ''
+consumer_secret= ''
+access_token=''
+access_token_secret=''
+#Autenticando
+auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+auth.set_access_token(access_token, access_token_secret)
+api = tweepy.API(auth,wait_on_rate_limit=True)
+#Contadores
+numPos = 0
+numNeg = 0
+total = 0
+#Buscando tweets
+for tweet in tweepy.Cursor(api.search,q="#bolsonaro", since = '2019-02-22',lang="pt").items(100):
+    #Texto do Tweet
+    textPT = unidecode(tweet.text) 
+    #Traduzindo para o Inglês
+    textEN = Translator().translate(textPT)
+    sentiment = TextBlob(textEN.text)
+     #Exibindo...
+    print("[PT-BR] "+textPT)
+    print("[EN]    "+textEN.text)
+    print("[Sent.] "+str(sentiment.polarity)+"\n")
+    #Estatísticas
+    total += 1
+    if sentiment.polarity > 0: 
+        numPos += 1 
+    elif sentiment.polarity < 0: 
+        numNeg += 1
+  
+#Sentimento geral
+mediaPos = numPos/total
+mediaNeg = numNeg/total
+print('Porcentagem de comentários positivos: '+str(mediaPos))
+print('Porcentagem de comentários negativos: '+str(mediaNeg))

@@ -1,0 +1,329 @@
+---
+title: "Full analytics Twitter"
+author: "Michel"
+date: "20/02/2020"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# load twitter library - the rtweet library is recommended now over twitteR
+library(rtweet)
+# plotting and pipes - tidyverse!
+library(ggplot2)
+library(dplyr)
+# text mining library
+library(tidytext)
+## R Markdown
+library(rtweet)
+library(wordcloud)
+library(wordcloud2)
+library(tm)
+library(RColorBrewer)
+library(cluster)
+library(fpc)
+library(dplyr)
+library(tidyr)
+library(tidytext)
+library(widyr)
+library(igraph)
+library(ggraph)
+library(rjson)
+library(jsonlite)
+# plotting and pipes - tidyverse!
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+
+# animated maps
+# to install: devtools::install_github("dgrtwo/gganimate")
+# note this required imagemagick to be installed
+library(leaflet)
+library(gganimate)
+library(lubridate)
+library(maps)
+library(ggthemes)
+
+options(stringsAsFactors = FALSE)
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+library(rtweet)
+library(ggplot2)
+library(dplyr)
+library(tidytext)
+library(rtweet)
+library(wordcloud)
+library(wordcloud2)
+library(tm)
+library(RColorBrewer)
+library(cluster)
+library(fpc)
+library(dplyr)
+library(tidyr)
+library(tidytext)
+library(widyr)
+library(igraph)
+library(ggraph)
+library(rjson)
+library(jsonlite)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+
+library(leaflet)
+library(gganimate)
+library(lubridate)
+library(maps)
+library(ggthemes)
+library(searchTwitter)
+library(pracma)
+library(twitteR)
+
+options(stringsAsFactors = FALSE)
+
+tweets <- search_tweets("@apyus", 
+                      n = 1000)
+
+#users <- search_users("#impeachmentRodrigoMaia",
+ #                     n = 500)
+
+## Search between two dates
+
+api_key <- "1roTr9unhjhU1c3Yk1RRyn9sN"
+api_secret_key <- "apHe9exUDv52pGvelaAa5kzB88X7Vev9rtmBLOiM1kEfwWXb9a"
+access_token <- "2507354983-KRq6MTyKY7hyOtgAIGgq4stW4FYMkdOaNsT9fjX"
+access_token_secret <- "P6d3pokpFhmfePsxQOVhDsTEJITo2C0T38jSWymCmg3po"
+
+## authenticate via web browser
+token <- create_token(
+  app = "AccessAPITry",
+  consumer_key = api_key,
+  consumer_secret = api_secret_key,
+  access_token = access_token,
+  access_secret = access_token_secret)
+
+setup_twitter_oauth(api_key, api_secret_key, access_token, access_token_secret)
+tweetsdate <-          searchTwitter('corona OR coronavirus OR coronavírus',n = 500, since='2020-02-26 11:00:00', until='2020-03-09 05:00:00', lang = "pt")
+
+tweets %>%
+  count(location, sort = TRUE) %>%
+  mutate(location = reorder(location,n)) %>%
+  na.omit() %>%
+  top_n(20) %>%
+  ggplot(aes(x = location,y = n)) +
+  geom_col() +
+  coord_flip() +
+      labs(x = "Location",
+      y = "Count",
+      title = "Twitter users - unique locations ")
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r palavras, echo=FALSE}
+# remove http elements manually
+tweets$stripped_text <- gsub("http.*","",  tweets$text)
+tweets$stripped_text <- gsub("https.*","", tweets$stripped_text)
+
+
+
+tweets_clean <- tweets %>%
+  dplyr::select(stripped_text) %>%
+  unnest_tokens(word, stripped_text)
+
+# plot the top 15 words -- notice any issues?
+
+for (i in length(tweets_clean$word)){
+  if (strcmp(as.character(tweets_clean$word[i]), 'veramagalhaes')){
+    tweets_clean$word[i] =  'vera'
+  }
+  if (strcmp(as.character(tweets_clean$word[995]), 'magalhães')){
+    tweets_clean$word[995] =  'vera'
+  }
+  if (strcmp(as.character(tweets_clean$word[i]), 'magalhães')){
+    tweets_clean$word[i] =  'vera'
+  }
+}
+
+
+tweets_clean %>%
+  count(word, sort = TRUE) %>%
+  top_n(15) %>%
+  mutate(word = reorder(word, n)) %>%
+  ggplot(aes(x = word, y = n)) +
+  geom_col() +
+  xlab(NULL) +
+  coord_flip() +
+      labs(x = "Count",
+      y = "Unique words",
+      title = "Count of unique words found in tweets")
+
+word <- stopwords("portuguese")
+
+word <- c(word, "maia", "impeachmentrodrigomaia", "é", "lá", "rt", "pra", "vai", "tag","somostodosbolsonaros", "de",
+          "bolsonaro", "brasil", "vamos", "presidente", "governo", "tá", "jairbolsonaro", "dia", "meta", "lugar", "povo",
+          "melhor", "ver", "bem", "vou", "aqui", "deixar", "quer", "lutar", "tudo", "aí", "verdade", "quanto", "gente",
+          "bora", "importa", "cara", "15", "números", "sendo", "tendo", "primeiro", "tts", "apyus", "magalhães")
+cleaned_tweet_words <- tweets_clean %>%
+  anti_join(as.data.frame.character(word))
+
+
+
+cleaned_tweet_words %>%
+  count(word, sort = TRUE) %>%
+  top_n(15) %>%
+  mutate(word = reorder(word, n)) %>%
+  ggplot(aes(x = word, y = n)) +
+  geom_col() +
+  xlab(NULL) +
+  coord_flip() +
+      labs(y = "Count",
+      x = "Unique words",
+      title = "Count of unique words found in tweets",
+      subtitle = "#SomosTodosBolsonaros")
+
+```
+
+```{r pareamento}
+# Parear
+tweets_paired_words <- tweets %>%
+  dplyr::select(stripped_text) %>%
+  unnest_tokens(paired_words, stripped_text, token = "ngrams", n = 2)
+
+tweets_paired_words %>%
+  count(paired_words, sort = TRUE)
+
+tweets_separated_words <- tweets_paired_words %>%
+  separate(paired_words, c("word1", "word2"), sep = " ")
+
+tweets_filtered <- tweets_separated_words %>%
+  filter(!word1 %in% stop_words$word) %>%
+  filter(!word2 %in% stop_words$word)
+
+# new bigram counts:
+words_counts <- tweets_filtered %>%
+  count(word1, word2, sort = TRUE)
+
+
+words_counts %>%
+        filter(n >= 200) %>%
+        graph_from_data_frame() %>%
+        ggraph(layout = "fr") +
+        # geom_edge_link(aes(edge_alpha = n, edge_width = n))
+        # geom_edge_link(aes(edge_alpha = n, edge_width = n)) +
+        geom_node_point(color = "darkslategray4", size = 3) +
+        geom_node_text(aes(label = name), vjust = 1.8, size = 3) +
+        labs(title = "Word Network: Tweets using the hashtag",
+             subtitle = "Text mining twitter data ",
+             x = "", y = "")
+
+
+
+
+```
+
+```{r}
+texto_vj <- VCorpus(VectorSource(enc2native(tweets$text)))
+texto_vj <- tm_map(texto_vj, content_transformer(function(x) iconv(x, to='UTF-8', sub='byte')))
+texto_vj <- tm_map(texto_vj, content_transformer(tolower))
+texto_vj <- tm_map(texto_vj, removePunctuation)
+
+
+texto_vj <- tm_map(texto_vj,removeWords, word)
+texto_vj
+```
+```{r}
+# Limpando alguns termos
+matriz_vj <- DocumentTermMatrix(texto_vj)
+frequencia_vj <- colSums(as.matrix(matriz_vj))   
+matriz_vj
+matriz_vj_clean <- removeSparseTerms(matriz_vj, 0.965) 
+frequencia_vj <- colSums(as.matrix(matriz_vj_clean))  
+frequencia_vj
+```
+
+```{r}
+# ajustes finais
+#text_vj_final <- tm_map(texto_vj, removeWords, word1)
+
+#matriz_vj_clean <- removeSparseTerms(DocumentTermMatrix(text_vj_final), 0.95) 
+#frequencia_vj <- colSums(as.matrix(matriz_vj_clean))  
+#frequencia_vj
+```
+
+
+```{r}
+# Exibição da nuvem de palavras
+cores <- brewer.pal(5,"Dark2")
+wordcloud(names(frequencia_vj),frequencia_vj,min.freq=5,max.words=100, random.order=T, colors=cores)
+```
+
+```{r}
+df_cloud2 <- as.data.frame(frequencia_vj)
+df_cloud2[,2] = df_cloud2[,1]
+df_cloud2[,1] = names(frequencia_vj)
+wordcloud2(df_cloud2)
+```
+
+``` {r mapa}
+json_file <- "C:/Users/miche/Documents/Twitter Analysis/boulder_flood_geolocated_tweets.json"
+# import json file line by line to avoid syntax errors
+# this takes a few seconds
+boulder_flood_tweets <- stream_in(file(json_file))
+
+tweet_data <- data.frame(date_time = boulder_flood_tweets$created_at,
+                         username = boulder_flood_tweets$user$screen_name,
+                         tweet_text = boulder_flood_tweets$text,
+                         coords = boulder_flood_tweets$coordinates)
+
+# flood start date sept 13 - 24 (end of incident)
+start_date <- as.POSIXct('2013-09-13 00:00:00')
+end_date <- as.POSIXct('2013-09-24 00:00:00')
+
+# cleanup & and filter to just the time period around the flood
+flood_tweets <- tweet_data %>%
+  mutate(coords.coordinates = gsub("\\)|c\\(", "", coords.coordinates),
+         date_time = as.POSIXct(date_time, format = "%a %b %d %H:%M:%S +0000 %Y")) %>%
+  separate(coords.coordinates, c("long", "lat"), sep = ", ") %>%
+  mutate_at(c("lat", "long"), as.numeric)
+# explore the data
+
+world_basemap <- ggplot() +
+  borders("world", colour = "gray85", fill = "gray80") +
+  theme_map()
+
+world_basemap
+
+
+# remove na values
+tweet_locations <- flood_tweets %>%
+  na.omit()
+
+world_basemap +
+  geom_point(data = flood_tweets, aes(x = long, y = lat),
+             colour = 'purple', alpha = .5) +
+  scale_size_continuous(range = c(1, 8),
+                        breaks = c(250, 500, 750, 1000)) +
+  labs(title = "Tweet Locations During the Boulder Flood Event")
+
+
+site_locations <- leaflet(tweet_locations) %>%
+  addTiles() %>%
+  addCircleMarkers(lng = ~long, lat = ~lat, popup = ~tweet_text,
+                   radius = 3, stroke = FALSE)
+
+site_locations
+```
+
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

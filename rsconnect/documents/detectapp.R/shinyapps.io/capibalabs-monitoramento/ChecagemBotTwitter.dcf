@@ -1,0 +1,13 @@
+name: ChecagemBotTwitter
+title: ChecagemBotTwitter
+username:
+account: capibalabs-monitoramento
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 1880910
+bundleId: 2841390
+url: https://analise-monitoramento.shinyapps.io/ChecagemBotTwitter/
+when: 1583064340.34597
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .RData|02-10-2020_1930.csv|2019_nC0v_20200121_20200126 - SUMMARY.csv|2019_nC0v_20200121_20200126_cleaned.csv|2019_nCoV_20200121_20200127.csv|2019_nCoV_20200121_20200128.csv|2019_nCoV_20200121_20200130.csv|2019_nCoV_20200121_20200131.csv|2019_nCoV_20200121_20200201.csv|2019_nCoV_20200121_20200205.csv|2019_nCoV_20200121_20200206.csv|boulder_flood_geolocated_tweets.json|CV_LatLon_21Jan_6Feb.csv|detectBot.R|dia15.txt|esqrdir.ows|index.Rmd|maiag1.png|maiag2.png|maiag3.png|maiap.png|README.md|Rplot.png|testeTwitter.html|VazaJato.nb.html|VazaJato.Rmd|ChecagemBotTwitter/app.R|ChecagemBotTwitter/rsconnect/shinyapps.io/capibalabs-monitoramento/ChecagemBotTwitter.dcf

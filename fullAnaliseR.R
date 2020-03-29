@@ -34,7 +34,7 @@ library(tweetbotornot)
 library(plotly)
 library(translateR)
 
-tagPesquisada <- "MP de Bolsonaro"
+tagPesquisada <- "Corona OR coronavírus OR COVID OR corona vírus"
 
 tweets <- search_tweets(tagPesquisada, include_rts = FALSE, n = 18000, retryonratelimit = TRUE, lang = "pt")
 
@@ -359,7 +359,509 @@ t1
 
 # sentimentos ingles
 dados$sentimento <- as.character(dados$sentimento)
-sentis <- get_nrc_sentiment(translate(words))
+sentis <- get_nrc_sentiment("home
+people
+covid
+
+world
+Tue
+why
+can
+about
+take
+quarantine
+all
+n
+do
+cause
+die
+I want
+stay
+God
+OK
+against
+to
+no
+kill
+pro
+why
+Speaking
+Woods
+go
+deaths
+nothing
+life
+parents
+I'm
+fuck
+cases
+Cheers
+I can handle
+P
+that
+Yes
+years
+So
+mother
+go out
+China
+end
+fear
+today
+person
+speak
+
+new
+days
+death
+favor
+no one
+worse
+soon
+go
+year
+time
+economy
+does
+pandemic
+to work
+huh
+before
+doing
+hunger
+I wanted
+pass
+catch
+Shit
+although
+ronaldocaiado
+Street
+risk
+there
+combat
+account
+died
+Never
+the flu
+stop
+cure
+stay
+You know
+disease
+because
+speaks
+someone
+crisis
+family
+think
+case
+already
+dies
+So
+
+dad
+know
+others
+bigger
+
+any less
+population
+was
+Where
+
+of that
+said
+need
+power
+state
+comes
+come back
+ass
+money
+carnival
+Chinese
+problem
+to take
+job
+time
+group
+turn
+to know
+all
+lack
+symptoms
+did
+me
+so much
+ç
+Bro
+hn
+was going
+be
+bitch
+little grip
+only
+middle
+hour
+Italy
+all
+
+tell
+can I
+athlete
+good
+stop
+bolsonarotemrazao
+disease
+in that
+fault
+fuck
+leaf
+fuck
+globe
+seniors
+isolation
+other
+leave
+number
+look
+immune
+lol
+Eh
+others
+any
+He gave
+alcohol
+I hate
+part
+love
+thousand
+in that
+must
+video
+fight
+woman
+want
+ever
+things
+too much
+exist
+return
+friends
+inside
+hospital
+killed
+says
+leaves
+lots of
+month
+came
+goes by
+vaccine
+end
+jdoriajr
+Social
+ended
+big
+dengue
+only
+go
+gives
+first
+City
+bad
+none
+another
+looks
+little
+type
+Brazilian
+missing
+governors
+took
+ends
+enough
+dying
+politics
+since
+near
+think
+normal
+Water
+hj
+what
+said
+gel
+Stop
+almost
+seeing
+equal
+
+
+finish
+saying
+two
+name
+historic
+week
+chaos
+has arrived
+doctor
+why
+kkkk
+Seriously
+test
+assurance
+to arrive
+two
+governor
+hand
+hence
+form
+need
+far
+can
+situation
+yesterday
+Knife
+times
+head
+While
+Mr
+to help
+right
+d
+millions
+some
+times
+months
+folks
+some
+bbb
+due
+son
+press
+I died
+dead
+news
+sad
+
+Paulo
+saw
+kkk
+party
+bts
+contact
+of this
+hands
+media
+really
+agr
+Many
+problems
+
+outbreak
+air
+infected
+measures
+some
+friend
+real
+take out
+watch
+birthday
+Photograph
+Too
+saw
+lol
+countries
+beyond
+passing
+
+bbb
+I expect
+serious
+listen
+TV
+purchase
+covid
+worldwide
+possible
+something
+gizelly
+killing
+wanting
+system
+giving
+time
+side
+friend
+ache
+thinking
+think
+asked question
+important
+panic
+safety
+
+some
+after
+daughter
+guys
+Brazilians
+happy
+same
+hate
+parents
+see
+hospitals
+way
+second
+come over
+stay
+gt
+kkkkkk
+business
+OK
+bolsonarosp
+daniel
+USA
+age
+mutation
+pay
+politicians
+however
+will
+easy
+kkkkkkkk
+new
+
+ah
+eat
+log in
+mt
+ñ
+class
+etc
+general
+squid
+body
+avoid
+man
+die
+pneumonia
+sp
+finding
+there
+take it
+poor
+streets
+use
+hell
+none
+
+treatment
+understand
+flaviobolsonaro
+passed on
+own
+suspicious
+wilsonwitzel
+
+front
+pt
+Lady
+such
+tests
+help
+mouth
+fact
+done
+going
+died
+News
+River
+bag
+subject matter
+children
+left
+cattle
+like
+medicine
+bad
+to save
+contagion
+stayed
+Final
+brother
+could
+porn
+positive
+so much
+total
+grandfather
+fake
+stay
+war
+take along
+majority
+relationship
+bozo
+sick
+g
+together
+Catching
+lives
+hair
+thanks
+afternoon
+only
+put on
+die
+I dreamed
+old
+master
+disgrace
+should
+fdp
+staying
+stay
+young
+market
+showing
+thanks
+oms
+could
+miss you
+
+to drop
+information
+prevention
+streaming
+epidemic
+all
+play
+congratulations
+political
+sdv
+solution
+Dice
+during
+infected
+Jesus
+keep
+many
+Follow
+begin
+follow
+history
+jikook
+show
+msm
+question
+fast
+using
+")
 
 View(tweets)
 
@@ -408,7 +910,7 @@ tweets %>%
   geom_col() +
   coord_flip() +
   labs(x = "Perfil",
-       y = "Frquência de impulsionamento",
+       y = "Frequência de impulsionamento usuários",
        title = tagPesquisada)
 
 users <- unique(tweets$screen_name)
@@ -420,7 +922,7 @@ users1 <- tweets %>%
 
 users1 <- users1[1:100,]
 
-data <- botornot(users1$screen_name)
+data <- botornot("users1$screen_name")
 data$bot <- 1
 for (i in 1:nrow(data)){
   if (data$prob_bot[i] > 0.85)
@@ -429,10 +931,11 @@ for (i in 1:nrow(data)){
     data$bot[i] = "humano"
 }
 
+usuariosbots <- ""
 # usuarios considerados bots
 for (i in 1:nrow(data)){
   
-  if (data$prob_bot[i] > 0.98){
+  if (data$prob_bot[i] > 0.97){
     usuariosbots <- append(usuariosbots, c(data$screen_name[i]))
     
   } else {
@@ -451,8 +954,8 @@ tweets %>%
   ggplot(aes(x = screen_name,y = n)) +
   geom_col() +
   coord_flip() +
-  labs(x = "Perfil",
-       y = "Frquência de impulsionamento",
+  labs(x = "Perfil com comportamento próximo a bots",
+       y = "Frequência de impulsionamento",
        title = tagPesquisada)
 
 usuariosbots 
